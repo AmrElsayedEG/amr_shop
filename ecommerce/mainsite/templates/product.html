@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{% block title %} Amr Shop - All Products {% endblock %}
+{% block content %}
+{% load static  %}
+        <section class="one-product">
+            <div class="row">
+                <div class="col-lg-5">
+                    <img class="img-responnsive" src="{{oneP.img.url}}" style="width: 70%"> </div>
+                <div class="col-lg-7">
+                    <h1>{{oneP.Title}}</h1>
+                    {% if oneP.Discount_Price %}
+                            <h1><p id="price">{{oneP.Discount_Price}} <strike>{{oneP.Price}} </strike></p></h1>
+
+                            {% else %}
+                           <h1> <p id="price">{{oneP.Price}} </p></h1>
+                            {% endif %}
+                    <p>{{oneP.Information}}</p>
+                        <div class="social-media">
+                        <a href="http://google.com"><i class="fab fa-facebook-square icon" ></i></a>
+                        <a href="http://google.com"><i class="fab fa-google icon" ></i></a>
+                        <a href="http://google.com"><i class="fab fa-github-square icon"></i></a>
+                        <a href="http://google.com"><i class="fab fa-twitter-square icon" ></i></a>
+                    </div>
+
+
+                        <div class="row" style="margin-top: 50px;">
+
+                                <form method="post" action="{% url 'cart:cart_add' oneP.id %}">
+                                {% csrf_token %}
+                                {{cart_product_form}}
+                                <input class="btn btn-primary" type="submit" value="Add to Cart">
+
+                            </form>
+
+
+                        </div>
+                        <div class="row">
+                            <!--<a href=""><button type="button" class="btn btn-danger text">ADD TO CART</button></a>-->
+
+                        </div>
+                        <div class="row  text-center" style="width: 70%">
+                    <div class="col-lg-4 col-md-4 col-xs-4">
+                        <img src="{% static 'img/discount.jpg'%}" width="50" height="53"/>
+                        <h6>Discount System</h6>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-xs-4">
+                        <img src="{% static 'img/free-del.jpg' %}" width="50" height="53"/>
+                        <h6>Free Delivery</h6>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-xs-4">
+                        <img src="{% static 'img/support247.jpg' %}" width="50" height="53"/>
+                        <h6>Support 24/7</h6>
+                    </div>
+                </div>
+
+                
+            </div>    
+                </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Information</h3>
+                    <div class="infotag"></div>
+                </div>
+                <div class="col-lg-12">
+                    <p>{{oneP.Details}}</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="alsolike">
+            <div class="row text-center">
+                <div class="col-lg-12">
+                    <h1>You Might Also Like</h1>
+                </div>
+
+                <div class="products visible-lg visible-md visible-sm text-center">
+
+                <div class="row">
+                    {% for alsoLike in alsoLike %}
+                    <div class="col-lg-3 col-md-3 col-sm-6">
+                        <a href="/product/{{alsoLike.id}}-{{alsoLike.Title}}"><div class="product-box">
+                            <img class="img-responsive" src="{{alsoLike.img.url}}"/>
+                            <div id="sale">
+                                <button type="button" class="btn btn-danger prod-btn">-20%</button>
+                            </div>
+                            <div id="new">
+                                <button type="button" class="btn prod-btn">-20%</button>
+                            </div>
+                            <p>{{alsoLike.Title}}</p>
+                            {% if alsoLike.Discount_Price %}
+                            <p id="price">{{alsoLike.Discount_Price}} <strike>{{alsoLike.Price}} </strike></p>
+
+                            {% else %}
+                            <p id="price">{{alsoLike.Price}} </p>
+                            {% endif %}
+                            </div></a>
+                    </div>
+                    {% endfor %}
+                    </div>
+                    
+                </div>
+                
+                
+                
+            </div>
+            <!-- Products for mobile -->
+            <div class="mob-products visible-xs">
+                <div class="container">
+                        {% for alsoLike in alsoLike %}
+                        <div class="product-box">
+                            <div class="row">
+
+                                <div class="col-sm-6 col-xs-12">
+                                        <a href="/product/{{alsoLike.id}}-{{alsoLike.Title}}"><img class="img-responsive" src="{{alsoLike.img.url}}"/></a>
+                                </div>
+                            </div>
+                            <div class="row text-center">
+                                <div class="col-sm-6 col-xs-12">
+                                        <p>{{alsoLike.Title}}</p>
+                                    {% if alsoLike.Discount_Price %}
+                            <p id="price">{{alsoLike.Discount_Price}} <strike>{{alsoLike.Price}} </strike></p>
+
+                            {% else %}
+                            <p id="price">{{alsoLike.Price}} </p>
+                            {% endif %}
+
+                                    <button onclick="window.location.href='/product/{{alsoLike.id}}-{{alsoLike.Title}}'"  type="button" class="btn btn-primary btn-btnbtn">Read More</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12">
+                                    <div class="mob-lineline"></div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+
+                </div>
+            </div>
+            </div>
+        </section>
+        {% endblock %}

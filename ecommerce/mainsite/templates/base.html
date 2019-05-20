@@ -1,0 +1,185 @@
+{% load static  %}
+{% load mathfilters %}
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link rel="stylesheet" href="{% static  'css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static  'css/style.css' %}">
+        <link rel="stylesheet" href="{% static  'css/all.min.css'%} ">
+        <link rel="stylesheet" href="{% static  'css/animate.css' %}">
+        <title>{% block title %}{% endblock %}</title>
+    </head>
+    <body>
+       <script src="{% static  'js/jquery-3.4.0.min.js' %}"></script>
+       <script type="text/javascript" src="{% static  'js/bootstrap.min.js' %}"></script>
+        <script src="{% static  'js/all.min.js' %}"></script>
+        <script src="{% static 'js/my.js' %}"></script>
+         <script src="{% static  'js/wow.min.js' %}"></script>
+        <script>
+              new WOW().init();
+              </script>
+
+    <section class="navb">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+          <div class="container">
+
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">Amr Shop</a>
+
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="/">Home <span class="sr-only">(current)</span></a></li>
+                <li><a href="/sales">Sales</a></li>
+                <li><a href="/all">All Products</a></li>
+                <li><a href="/contact">Contact Us</a></li>
+
+
+              </ul>
+
+              <ul class="nav navbar-nav navbar-right">
+                {% if user.is_authenticated %}
+                  <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="/user/profile/dashboard">My Dashboard</a></li>
+                    <li><a href="/user/view/{{r}}">My Profile</a></li>
+
+                    <li role="separator" class="divider"></li>
+                      {% if user.is_superuser %}
+                    <li><a href="/ticket/all-tickets">View all Users Tickets</a></li>
+                      {% else %}
+                      <li><a href="/ticket/">Support Ticket</a></li>
+                      {% endif %}
+                      <li><a href="/user/logout/"><button class="btn btn-danger">Logout</button></a></li>
+                  </ul>
+                </li>
+                  {% else %}
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="/user/login/">Login</a></li>
+                    <li><a href="/user/signup/">Register</a></li>
+
+
+
+                  </ul>
+                </li>
+                    {% endif %}
+
+                  <!-- END -->
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="card-img fas fa-shopping-bag"></i></a>
+                  <ul class="dropdown-menu">
+                      {% for item in cart %}
+					{% with  product=item.product %}
+                    <li>
+                        <div class="row">
+                            <div class="cart-img">
+                                <div class="col-lg-6">
+                                    <img class="img-responsive cart-img-size" src="{{product.img.url}}"/>
+                                </div>
+                                <div class="col-lg-6 text-center">
+                                    <p class="cart-price-size">Total Price: {{item.total_price}}$</p>
+                                </div>
+                                <div class="col-lg-6 text-center">
+                                    <p class="cart-price-size">Total Quantity: {{item.quantity}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li role="separator" class="divider"></li>
+
+
+                      {% endwith %}
+                      {% endfor %}
+                      <div class="cart-final text-center">
+                        <li>{{cart.get_total_price}}$ <button onclick="window.location.href='{% url 'cart:cart_detail' %}'" class="btn btn-danger">View Cart</button></li>
+                    </div>
+                  </ul>
+                </li>
+
+                  <!-- END -->
+
+
+
+              </ul>
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+        </nav>
+    </section>
+
+       {% block content %}
+
+
+
+        {% endblock %}
+        <section class="first-footer wow flipInX">
+            <div class="container">
+                <div class="col-lg-5 col-md-5  col-sm-6">
+                    <h3>Amr Shop</h3>
+                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
+                    <div class="social-media">
+                        <a href="http://google.com"><i class="fab fa-facebook-square icon" ></i></a>
+                        <a href="http://google.com"><i class="fab fa-google icon" ></i></a>
+                        <a href="http://google.com"><i class="fab fa-github-square icon"></i></a>
+                        <a href="http://google.com"><i class="fab fa-twitter-square icon" ></i></a>
+                    </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-6">
+                        <h3>Products</h3>
+                        <ul class="list-unstyled">
+                            <a href=""><li>Price drop</li></a>
+                            <a href=""><li>New products</li></a>
+                            <a href=""><li>Best sales</li></a>
+                        </ul>
+                    </div>
+                <div class="clearfix visible-sm visible-xs"></div>
+                    <div class="col-lg-2 col-md-2 col-sm-6">
+                        <h3>Information</h3>
+                        <ul class="list-unstyled">
+                            <a href=""><li>Delivery</li></a>
+                            <a href=""><li>Legal Notice</li></a>
+                            <a href=""><li>Terms</li></a>
+                            <a href=""><li>About Us</li></a>
+                            <a href=""><li>Payment</li></a>
+                            <a href=""><li>Conact Us</li></a>
+                            <a href=""><li>sitemap</li></a>
+                            <a href=""><li>store</li></a>
+                        </ul>
+                    </div>
+                    <div class="col-lg-2 col-md-2">
+                        <h3>Your Account</h3>
+                        <ul class="list-unstyled">
+                            <a href=""><li>Address</li></a>
+                            <a href=""><li>Credit Card</li></a>
+                            <a href=""><li>Orders</li></a>
+                            <a href=""><li>Personal Info.</li></a>
+                        </ul>
+                    </div>
+            </div>
+        </section>
+        <section class="footer">
+            <div class="container">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    © 2019 - <a href='https://www.facebook.com/amr.elsayed.73999'> Amr Elsayed</a>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <img class="img-responsive" src="{% static 'img/payments.jpg' %}"/>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>

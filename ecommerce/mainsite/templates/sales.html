@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% load mathfilters %}
+{% block title %} Amr Shop - All Products {% endblock %}
+{% block content %}
+{% load static  %}
+
+        <section class="search-all" style="margin-bottom:30px">
+            <div class="header-all text-center">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1>Products On Sale Only</h1>
+                    </div>
+
+
+                <!-- Search -->
+
+                    <div class="container text-center">
+                        <div class="row">
+
+                            <h5>Search all products</h5>
+                            <form action="/search/" method="post" class="col-lg-2 col-md-2 col-xs-6">
+                                {% csrf_token %}
+                                <input type="hidden" name="re" value="Dresses" readonly>
+
+                                <button style="width:100%;font-size:20px" class="btn btn-danger" type="submit">Dresses</button>
+                            </form>
+                            <form action="/search/" method="post" class="col-lg-2 col-md-2 col-xs-6">
+                                {% csrf_token %}
+
+                                <input type="hidden" name="re" value="OutWare" readonly>
+
+                                <button style="width:100%;font-size:20px" class="btn btn-primary" type="submit">OutWare</button>
+                            </form>
+                            <form action="/search/" method="post" class="col-lg-2 col-md-2 col-xs-6">
+                                {% csrf_token %}
+
+                                <input type="hidden" name="re" value="Blouses" readonly>
+
+                                <button style="width:100%;font-size:20px" class="btn btn-danger" type="submit">Blouses</button>
+                            </form>
+                            <form action="/search/" method="post" class="col-lg-2 col-md-2 col-xs-6">
+                                {% csrf_token %}
+
+                                <input type="hidden" name="re" value="T-shirts" readonly>
+
+                                <button style="width:100%;font-size:20px" class="btn btn-primary" type="submit">T-shirts</button>
+                            </form>
+                            <form action="/search/" method="post" class="col-lg-2 col-md-2 col-xs-6">
+                                {% csrf_token %}
+
+                                <input type="hidden" name="re" value="Other" readonly>
+                                <button style="width:100%;font-size:20px" class="btn btn-danger" type="submit">Other</button>
+                            </form>
+                            <form action="/search/" method="post" class="col-lg-2 col-md-2 col-xs-6">
+                                {% csrf_token %}
+
+                                <input type="hidden" name="re" value="Bags" readonly>
+                                <button style="width:100%;font-size:20px" class="btn btn-primary" type="submit">Bags</button>
+                            </form>
+                        </div>
+                    </div>
+
+
+
+
+
+        </section>
+        <section class="all-products">
+            <div class="products visible-lg visible-md visible-sm text-center">
+                <div class="row">
+                    {% for products in products %}
+                    <div class="col-lg-3 col-md-3 col-sm-6">
+                        <a href="/product/{{products.id}}-{{products.Title}}"><div class="product-box">
+                            <img class="img-responsive" src="{{products.img.url}}"/>
+                            <div id="sale">
+                                <button type="button" class="btn btn-danger prod-btn">{{products.Discount_Price|mul:100|div:products.Price|floatformat }} %</button>
+                            </div>
+                            <div id="new">
+                                <button type="button" class="btn prod-btn">{{products.Discount_Price|mul:100|div:products.Price|floatformat }} %</button>
+                            </div>
+                            <p>{{products.Title}}</p>
+                            {% if products.Discount_Price %}
+                            <p id="price">{{products.Discount_Price}} <strike>{{products.Price}} </strike></p>
+
+                            {% else %}
+                            <p id="price">{{products.Price}} </p>
+                            {% endif %}
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+
+
+                </div>
+            </div>
+
+            <!-- Products for mobile -->
+            <div class="mob-products visible-xs">
+                <div class="container">
+                        {% for products in products %}
+                        <div class="product-box">
+                            <div class="row">
+
+                                <div class="col-sm-6 col-xs-12">
+                                        <a href="/product/{{products.id}}-{{products.Title}}"><img class="img-responsive" src="{{products.img.url}}"/></a>
+                                </div>
+                            </div>
+                            <div class="row text-center">
+                                <div class="col-sm-6 col-xs-12">
+                                        <p>{{products.Title}}</p>
+                                    {% if products.Discount_Price %}
+                            <p id="price">{{products.Discount_Price}} <strike>{{products.Price}} </strike></p>
+
+                            {% else %}
+                            <p id="price">{{products.Price}} </p>
+                            {% endif %}
+
+                                    <button onclick="window.location.href='/product/{{products.id}}-{{products.Title}}'"  type="button" class="btn btn-primary btn-btnbtn">Read More</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12">
+                                    <div class="mob-lineline"></div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+
+                </div>
+            </div>
+        </section>
+
+        {% endblock %}

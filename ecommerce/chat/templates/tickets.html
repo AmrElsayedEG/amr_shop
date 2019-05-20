@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %} Technical Support {% endblock %}
+{% block content %}
+
+<div class="container text-center">
+<h1>Welcome to our Tech-Support</h1>
+
+
+    <div class="col-lg-6" style="width:100%;border:5px solid #ddd;font:16px/26px Georgia, Garamond, Serif;overflow:auto;overflow: hidden;">
+    <h4>Your Tickets</h4><hr>
+        {% if tickets %}
+            {% for tickets in tickets %}
+
+            {% if tickets.is_open == 'True' %} Open Ticket : {%else%} Closed ticket {% endif %}<a href="{{tickets.id}}"> {{tickets.title}}</a> <hr>
+            {% endfor %}
+        {% else %}
+            <h6>You have no tickets</h6>
+        {% endif %}
+        <a href="new"><button class="btn btn-primary" type="button">Create New Ticket</button> </a>
+    </div>
+</div>
+{% endblock %}

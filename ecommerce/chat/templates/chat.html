@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %} {{p.user}} {% endblock %}
+{% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("div").scrollTop(100000);
+});
+</script>
+
+<div class="container text-center"><h1>Ticket #{{id}}</h1>
+{% if tic == 'True' %}
+    <h3>This Ticket is Open</h3>
+    {% else %}
+    <h3>This Ticket is Closed , To reopen just send a message</h3>
+    {% endif %}
+{% if not error %}
+
+    <div style="width:100%;border:5px solid #ddd;font:16px/26px Georgia, Garamond, Serif;overflow:auto;overflow: hidden;">
+        <div align="left">
+
+    {% for all in all %}
+        {% if all.one.is_superuser %}
+     Support : {{all.message}} <hr>
+            {% else %}
+            {{all.one}} : {{all.message}} <hr>
+        {% endif %}
+    {% endfor %}
+
+            </div>
+    </div>
+
+    <div align="center">
+    <br><br><br>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ message_form }}
+        <button type="submit">Send Message</button>
+    </form>
+
+        </div>
+</div>
+{% else %}
+<div style="width:100%;border:5px solid #ddd;font:16px/26px Georgia, Garamond, Serif;overflow:auto;overflow: hidden;">
+        <div align="center">
+            {{error}}
+        </div>
+</div>
+{% endif %}
+{% endblock %}

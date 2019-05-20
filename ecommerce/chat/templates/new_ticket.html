@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %} Technical Support {% endblock %}
+{% block content %}
+
+<div class="container text-center">
+<h1>Welcome to our Tech-Support</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ticketForm}}
+
+     <button type="submit">Add New Ticket</button>
+
+</form>
+{% endblock %}

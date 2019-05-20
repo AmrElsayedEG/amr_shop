@@ -1,0 +1,254 @@
+{% extends 'base.html' %}
+{% load mathfilters %}
+{% block title %} Amr Shop {% endblock %}
+{% block content %}
+{% load static  %}
+<script>
+
+$(document).ready(function(){
+  $(window).scroll(function(){
+  	var scroll = $(window).scrollTop();
+	  if (scroll > 200) {
+	    $(".navbar").css("background" , "#DDDDDD");
+	  }
+
+	  else{
+		  $(".navbar").css("background" , "transparent");
+	  }
+  })
+})
+</script>
+        <section class="slider">
+        <!-- slider -->
+            <div class="slider-text">
+                <div class="container ">
+                    <div class="row">
+                        <div class="col-lg-5 col-md-5 col-xs-8">
+                            <h1>Tees & Tops</h1>
+                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                            <a href="/all"><button type="button" class="btn btn-danger text">Discover More</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+</section>        
+<section class="adv wow bounceIn">
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4">
+                        <div class="adv-box">
+                            <img src="{% static  'img/discount.jpg' %}" width="50" height="53"/>
+                            <h3>Discount System</h3>
+                            <p> Nam libero tempore, cum soluta nobis est eligendi optio, cumque nihil impedit, quo minus id, quod maxime placeat</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <!-- carousel -->
+                        <div class="adv-box">    
+                            <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                              <div class="carousel-inner">
+                                <div class="item active d-inline-block">
+                                  <div class="car-box">
+                                      <div class="car-img">
+                                        <img class="img-fluid" src="{% static  'img/free-del.jpg' %}" width="50" height="53"/>
+                                      </div>
+                                      <div class="car-body">
+                                        <h3>Free Delivery</h3>
+
+                                    <p> Nam libero tempore, cum soluta nobis est eligendi optio, cumque nihil impedit, quo minus id, quod maxime placeat</p>
+                                      </div>
+                                  </div>
+                                </div>
+                                <div class="item">
+                                  <div class="car-box">
+                                      <div class="car-img">
+                                        <img class="img-fluid" src="{% static 'img/fast.png' %}" width="50" height="53"/>
+                                      </div>
+                                      <div class="car-body">
+                                        <h3>Fast Delivery</h3>
+
+                                    <p> Nam libero tempore, cum soluta nobis est eligendi optio, cumque nihil impedit, quo minus id, quod maxime placeat</p>
+                                      </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <div class="adv-box">
+                            <img src="{% static 'img/support247.jpg' %}" width="50" height="53"/>
+                            <h3>Support 24/7</h3>
+                            <p> Nam libero tempore, cum soluta nobis est eligendi optio, cumque nihil impedit, quo minus id, quod maxime placeat</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="brands wow fadeInDown">
+                <div class="row text-center">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <form action="/search/" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="re" value="Dresses" readonly>
+                        <img src="{% static 'img/dress.jpg' %}" width="344"/>
+                        <button class="btn" type="submit">DRESSES</button>
+                        </form>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <form action="/search/" method="post">
+                                {% csrf_token %}
+
+                                <input type="hidden" name="re" value="Blouses" readonly>
+                        <img src="{% static 'img/blosses.jpg' %}" width="344"/>
+                        <button class="btn" type="submit">BLOUSES</button>
+                        </form>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <form action="/search/" method="post">
+                                {% csrf_token %}
+
+                                <input type="hidden" name="re" value="T-shirts" readonly>
+                        <img src="{% static 'img/t-shirt.jpg' %}" width="344"/>
+                        <button class="btn" type="submit">T-SHIRTS</button>
+                        </form>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <form action="/search/" method="post">
+                                {% csrf_token %}
+
+                                <input type="hidden" name="re" value="OutWare" readonly>
+                        <img src="{% static 'img/Untitled-3.jpg' %}" width="344"/>
+                        <button class="btn activebtn" type="submit">OUTERWARE</button>
+                        </form>
+                    </div>
+                </div>
+        
+        </section>
+        
+        <section class="trend wow fadeIn">
+            <div class="container text-center">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-6">
+                    <h1>Top Trending</h1>
+                    <hr>
+                    <p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+                
+            </div>
+            <!-- Products Not for mobile -->
+            <div class="products visible-lg visible-md visible-sm text-center">
+                <div class="row">
+                    {% for final_list in final_list %}
+                    <div class="col-lg-3 col-md-3 col-sm-6">
+                        <a href="/product/{{final_list.id}}-{{final_list.Title}}"><div class="product-box">
+                            <img class="img-responsive" src="{{final_list.img.url}}"/>
+                            <div id="sale">
+                                <button type="button" class="btn btn-danger prod-btn">{{final_list.Discount_Price|mul:100|div:final_list.Price|floatformat }} %</button>
+                            </div>
+                            <div id="new">
+                                <button type="button" class="btn prod-btn">{{final_list.Discount_Price|mul:100|div:final_list.Price|floatformat }} %</button>
+                            </div>
+                            <p>{{final_list.Title}}</p>
+                            {% if final_list.Discount_Price %}
+                            <p id="price">{{final_list.Discount_Price}} <strike>{{final_list.Price}} </strike></p>
+
+                            {% else %}
+                            <p id="price">{{final_list.Price}} </p>
+                            {% endif %}
+                        </div>
+                    </div></a>
+                        {% endfor %}
+                </div>
+
+                    
+
+                <div class="row">
+                        <div class="col-lg-12">
+                            <a href="/all"> <button class="activebtn">All Products</button></a>
+                        </div>
+                    </div>
+            </div>
+            <!-- Products for mobile -->
+            <div class="mob-products visible-xs">
+                <div class="container">
+                    {% for final_list in final_list %}
+                        <div class="product-box">
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-6">
+                                        <a href="/product/{{final_list.id}}-{{final_list.Title}}"><img class="img-responsive" src="{{final_list.img.url}}"/></a>
+                                </div>
+                            </div>
+                            <div class="row text-center">
+                                <div class="col-sm-6 col-xs-6">
+                                        <p>{{final_list.Title}}</p>
+                                    {% if final_list.Discount_Price %}
+                            <p id="price">{{final_list.Discount_Price}} <strike>{{final_list.Price}} </strike></p>
+
+                            {% else %}
+                            <p id="price">{{final_list.Price}} </p>
+                            {% endif %}
+                                    
+                                    <button onclick="window.location.href='/product/{{final_list.id}}-{{final_list.Title}}'"  type="button" class="btn btn-primary btn-btnbtn">Read More</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-6">
+                                    <div class="mob-lineline"></div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <div class="row text-center">
+                        <div class="col-sm-12 col-xs-10">
+                            <a href="/all"> <button class="mob-ab activebtn">All Products</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="bags wow fadeInLeft">
+            <div class="text-center">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <img class="img-responsive" src="{% static 'img/bag.jpg' %}"/>
+                    </div>
+                    <div class="container">
+                        <div class="col-lg-6 col-md-6">
+                            <div class="bag-txt">
+                                <h1>Bags & Shoes</h1>
+                                <hr>
+                                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                <form action="/search/" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="re" value="Bags" readonly>
+                                <a href=""><button class="btn btn-white">Discover More</button></a>
+                                </form>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            </div>
+        </section>
+        <section class="logos wow fadeInRight">
+            <img class="img-responsive" src="{% static 'img/logo.jpg' %}"/>
+            <img class="img-responsive" src="{% static 'img/girls.jpg' %}"/>
+        </section>
+        <section class="googlemap visible-lg visible-md">
+            <div class="col-lg-12 col-md-12">
+                <div class="map-box">
+                <p>Alterego, 1 Infinite Loop, Cupertino,
+                    CA 95014</p>
+               <p>+2011 211 479 61</p>
+               <p>newsifb@gmail.com</p>
+               <p>Mon. - Sun: 09:00 - 19:00</p>
+            </div>
+            </div>
+           
+            
+        </section>
+        {% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %} Technical Support {% endblock %}
+{% block content %}
+
+<div class="container text-center">
+<h1>Welcome Tech-Support</h1>
+
+
+    <div class="col-lg-6" style="width:100%;border:5px solid #ddd;font:16px/26px Georgia, Garamond, Serif;overflow:auto;overflow: hidden;">
+    <h4>Open Tickets</h4><hr>
+        {% if opened %}
+            {% for opened in opened %}
+
+            <a href="{{opened.id}}"> {{opened.title}}</a> <hr>
+            {% endfor %}
+        {% else %}
+            <h6>No open tickets</h6>
+        {% endif %}
+
+    </div>
+
+
+<div class="col-lg-6" style="width:100%;border:5px solid #ddd;font:16px/26px Georgia, Garamond, Serif;overflow:auto;overflow: hidden;">
+    <h4>Closed Tickets</h4><hr>
+        {% if closed %}
+            {% for closed in closed %}
+
+            <a href="{{closed.id}}"> {{closed.title}}</a> <hr>
+            {% endfor %}
+        {% else %}
+            <h6>No open tickets</h6>
+        {% endif %}
+
+    </div>
+
+    </div>
+{% endblock %}

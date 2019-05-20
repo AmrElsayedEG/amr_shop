@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block title %} Amr Shop - My Dashboard {% endblock %}
+{% block content %}
+{% load static  %}
+        
+        <section class="my-orders-page">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            
+                                <div class="col-lg-8">
+                                    <div class="my-orders-list">
+                                        <h1>My Orders</h1>
+                                        <div class="order-list-table">
+                                            <table>
+                                                  <thead>
+                                                    <tr>
+                                                      <th>Order ID</th>
+                                                      <th>Order Status</th>
+                                                      <th>Details</th>
+                                                    </tr>
+                                                  </thead>
+                                                  
+                                                  <tbody>
+                                                  {% for orders in orders %}
+                                                    <tr>
+                                                      <td>#{{orders.id}}</td>
+                                                      <td>{% if orders.paid %} Paid {% else %} Not Paid {% endif %}</td>
+                                                      <th><a href="/user/profile/orders/{{orders.id}}">Details</a></th>
+                                                    </tr>
+                                                  {% endfor %}
+
+
+                                                  </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                    <div class="col-lg-4">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="edit-my-profile text-center">
+                                                   <a href="">
+                                                        <img class="img-circle center-block" src="{{profileUser.img.url}}" style="width: 20%">
+                                                    </a>
+                                                    <a href="">
+                                                        <h4>{{userinfo.first_name}} {{userinfo.last_name}}</h4>
+                                                    </a>
+                                                    <button class="btn btn-primary">Edit Profile</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                    
+                                        <div class="row text-center">
+                                            <div class="col-lg-12">
+                                                <div class="my-messages">
+                                                    <a href="/ticket">
+                                                    <h4>My Open Tickets</h4>
+                                                    <h1>{{open_tickets}}</h1>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+
+{% endblock %}

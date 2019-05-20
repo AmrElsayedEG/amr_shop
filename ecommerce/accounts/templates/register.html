@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Register {% endblock %}
+{% block content %}
+       <section class="login-section">
+
+           <div id="logreg-forms">
+
+               <form method="post" class="form-signup">
+                    <h3 class="text-center">Register New User</h3>
+                   {% csrf_token %}
+                 {{form.as_p}}
+                    <button class="btn btn-primary btn-block" type="submit"><i class="fas fa-user-plus"></i> Sign Up</button>
+
+                </form>
+           </div>
+       </section>
+
+        {% endblock %}

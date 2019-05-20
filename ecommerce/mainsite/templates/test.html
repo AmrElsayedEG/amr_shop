@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% block title %} Amr Shop - All Products {% endblock %}
+{% block content %}
+{% load static  %}
+
+        <section class="search-all">
+            <div class="header-all text-center">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1>All Products</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="search-all">
+                <form role="form">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                            <select class="form-control">
+                                <option value="Dresses">Dresses</option>
+                                <option value="Blouses">Blouses</option>
+                                <option value="T-shirts">T-shirts</option>
+                                <option value="OutWare">OutWare</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-6 col-md-3 col-sm-6 col-xs-6">
+                            <button type="submit" class="col-lg-6 btn btn-danger">Search Now</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+        <section class="all-products">
+            <div class="products visible-lg visible-md visible-sm text-center">
+                <div class="row">
+                    {% for products in products %}
+                    <div class="col-lg-3 col-md-3 col-sm-6">
+                        <a href="product.html"><div class="product-box">
+                            <img class="img-responsive" src="{{products.img.url}}"/>
+                            <div id="sale">
+                                <button type="button" class="btn btn-danger prod-btn">-20%</button>
+                            </div>
+                            <div id="new">
+                                <button type="button" class="btn prod-btn">-20%</button>
+                            </div>
+                            <p>{{products.Title}}</p>
+                            <p id="price">{{products.price}} <strike>$ 299.00</strike></p>
+                            </div></a>
+                    </div>
+                    {% endfor %}
+
+
+                </div>
+            </div>
+
+            <!-- Products for mobile -->
+            <div class="mob-products visible-xs">
+                <div class="container">
+
+                        <div class="product-box">
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12">
+                                        <a href="product.html"><img class="img-responsive" src="{% static 'img/1.jpg' %}"/></a>
+                                </div>
+                            </div>
+                            <div class="row text-center">
+                                <div class="col-sm-6 col-xs-12">
+                                        <p>Excepteur sint occaecat cupidatat</p>
+                                    <p id="price">$ 199.00 <strike>$ 299.00</strike></p>
+
+                                    <button onclick="window.location.href='product.html'"  type="button" class="btn btn-primary btn-btnbtn">Read More</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12">
+                                    <div class="mob-lineline"></div>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="product-box">
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12">
+                                        <a href="product.html"><img class="img-responsive" src="{% static 'img/2.jpg' %}"/></a>
+                                </div>
+                            </div>
+                            <div class="row text-center">
+                                <div class="col-sm-6 col-xs-12">
+                                        <p>Excepteur sint occaecat cupidatat</p>
+                                    <p id="price">$ 199.00 <strike>$ 299.00</strike></p>
+
+                                    <button onclick="window.location.href='product.html'" type="button" class="btn btn-primary btn-btnbtn">Read More</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12">
+                                    <div class="mob-lineline"></div>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="product-box">
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12">
+                                        <a href="product.html"><img class="img-responsive" src="{% static 'img/3.jpg' %}"/></a>
+                                </div>
+                            </div>
+                            <div class="row text-center">
+                                <div class="col-sm-6 col-xs-12">
+                                        <p>Excepteur sint occaecat cupidatat</p>
+                                    <p id="price">$ 199.00 <strike>$ 299.00</strike></p>
+
+                                    <button onclick="window.location.href='product.html'" type="button" class="btn btn-primary btn-btnbtn">Read More</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12">
+                                    <div class="mob-lineline"></div>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="product-box">
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12">
+                                        <a href="product.html"><img class="img-responsive" src="{% static 'img/4.jpg' %}"/></a>
+                                </div>
+                            </div>
+                            <div class="row text-center">
+                                <div class="col-sm-6 col-xs-12">
+                                        <p>Excepteur sint occaecat cupidatat</p>
+                                    <p id="price">$ 199.00 <strike>$ 299.00</strike></p>
+
+                                    <button onclick="window.location.href='product.html'" type="button" class="btn btn-primary btn-btnbtn">Read More</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-12">
+                                    <div class="mob-lineline"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                </div>
+            </div>
+        </section>
+
+        {% endblock %}
